@@ -12,7 +12,9 @@ class Encryptor
 
     @s = {}
 
-    PARTIAL_PASSWORD_LENGTH.times do |n|
+    PASSWORD_LENGTH.times do |n|
+      puts "Y[#{n}] = #{calculate_y(n)}"
+
       @s[n] = calculate_y(n) - password[n].to_i
     end
   end
@@ -21,8 +23,9 @@ class Encryptor
 
     y = {}
 
-    PARTIAL_PASSWORD_LENGTH.times do |n|
-
+    args[:positions].each_with_index do |position, index|
+      n = position - 1
+      y[n] = "Y_RECOVERED[#{n}] = #{@s[n] + args[:values][index]}"
     end
 
     true
